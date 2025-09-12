@@ -8,8 +8,8 @@ const DonateSection = () => {
       <p className="text-muted-foreground text-sm mb-4">
         Donate via Venmo or PayPal: <span className="font-medium">@d1goat0</span>
       </p>
-      <div className="flex gap-3">
-        <Button asChild className="btn-neon">
+      <div className="flex gap-3 justify-center">
+        <Button asChild variant="outline" className="border-primary/30 bg-background/10 backdrop-blur-sm hover:bg-primary/20 hover:border-primary">
           <a href="https://venmo.com/u/d1goat0" target="_blank" rel="noopener noreferrer" aria-label="Donate on Venmo @d1goat0">
             <div className="flex items-center gap-2">
               <Wallet className="w-4 h-4" />
@@ -17,7 +17,7 @@ const DonateSection = () => {
             </div>
           </a>
         </Button>
-        <Button asChild variant="secondary" className="btn-glass">
+        <Button asChild variant="outline" className="border-primary/30 bg-background/10 backdrop-blur-sm hover:bg-primary/20 hover:border-primary">
           <a href="https://paypal.me/d1goat0" target="_blank" rel="noopener noreferrer" aria-label="Donate on PayPal @d1goat0">
             <div className="flex items-center gap-2">
               <DollarSign className="w-4 h-4" />
