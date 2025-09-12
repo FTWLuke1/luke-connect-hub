@@ -29,18 +29,17 @@ const SocialLink = ({
   return (
     <Button
       asChild
-      variant="outline"
-      className="h-auto p-6 w-full justify-center space-x-4 group border-primary/30 bg-background/10 backdrop-blur-sm hover:bg-primary/20 hover:border-primary text-center"
+      className={`btn-glass h-auto p-6 w-full justify-start space-x-4 group ${gradientClass}`}
     >
       <a href={url} target="_blank" rel="noopener noreferrer">
         <div className="relative">
-          <Icon className="w-8 h-8 group-hover:text-primary-glow transition-colors mx-auto" />
+          <Icon className="w-8 h-8 group-hover:text-primary-glow transition-colors" />
           {status && (
             <div className={`absolute -top-1 -right-1 status-dot status-${status}`} />
           )}
         </div>
         
-        <div className="flex-1 text-center">
+        <div className="flex-1 text-left">
           <div className="font-semibold text-lg">{label}</div>
           {description && (
             <div className="text-muted-foreground text-sm">{description}</div>
