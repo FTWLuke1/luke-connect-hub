@@ -3,35 +3,59 @@ import { useEffect, useState } from "react";
 const AudioIntro = () => {
   const [hasAudio, setHasAudio] = useState(false);
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    const checkAudio = async () => {
-      try {
-        const response = await fetch('/media/intro.mp3');
-        if (response.ok) {
-          setHasAudio(true);
-          const audioElement = new Audio('/media/intro.mp3');
-          audioElement.volume = 0.5;
-          setAudio(audioElement);
-        }
-      } catch (error) {
-        console.log('No intro audio found');
-      }
+    const audioElement = new Audio('/media/intro.mp3');
+    audioElement.preload = 'auto';
+    audioElement.volume = 0.5;
+
+    const onCanPlay = () => setHasAudio(true);
+    const onPlay = () => setIsPlaying(true);
+    const onPause = () => setIsPlaying(false);
+
+    audioElement.addEventListener('canplay', onCanPlay);
+    audioElement.addEventListener('play', onPlay);
+    audioElement.addEventListener('pause', onPause);
+    audioElement.addEventListener('ended', onPause);
+
+    setAudio(audioElement);
+
+    // Try to detect quickly if the file exists
+    fetch('/media/intro.mp3')
+      .then((res) => {
+        if (res.ok) setHasAudio(true);
+      })
+      .catch(() => {});
+
+    return () => {
+      audioElement.removeEventListener('canplay', onCanPlay);
+      audioElement.removeEventListener('play', onPlay);
+      audioElement.removeEventListener('pause', onPause);
+      audioElement.removeEventListener('ended', onPause);
+      audioElement.pause();
     };
-    
-    checkAudio();
   }, []);
 
-  const playAudio = () => {
+  const playAudio = async () => {
     if (audio && hasAudio) {
-      audio.currentTime = 0;
-      audio.play();
-      return true;
+      try {
+        await audio.play();
+        return true;
+      } catch (e) {
+        return false;
+      }
     }
     return false;
   };
 
-  return { hasAudio, playAudio };
+  const pauseAudio = () => {
+    if (audio) {
+      audio.pause();
+    }
+  };
+
+  return { hasAudio, playAudio, pauseAudio, isPlaying };
 };
 
 export default AudioIntro;

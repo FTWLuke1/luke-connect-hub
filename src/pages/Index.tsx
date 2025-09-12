@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { 
   MessageCircle, 
   Github, 
@@ -12,23 +12,33 @@ import ProfileHeader from "@/components/ProfileHeader";
 import SocialLink from "@/components/SocialLink";
 import BackgroundVideo from "@/components/BackgroundVideo";
 import AudioIntro from "@/components/AudioIntro";
+import DonateSection from "@/components/DonateSection";
 import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
-  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-  const { hasAudio, playAudio } = AudioIntro();
+  const { hasAudio, playAudio, pauseAudio, isPlaying: isAudioPlaying } = AudioIntro();
   const { toast } = useToast();
 
-  const handlePlayAudio = () => {
+  useEffect(() => {
+    // Try to autoplay audio on load (may be blocked by some browsers)
     if (hasAudio) {
-      const played = playAudio();
+      playAudio();
+    }
+  }, [hasAudio, playAudio]);
+
+  const handlePlayAudio = async () => {
+    if (hasAudio) {
+      const played = await playAudio();
       if (played) {
-        setIsAudioPlaying(true);
         toast({
           title: "Playing intro audio",
           description: "Welcome to Luke_NKY's profile!",
         });
-        setTimeout(() => setIsAudioPlaying(false), 3000);
+      } else {
+        toast({
+          title: "Tap to enable audio",
+          description: "Your browser blocked autoplay. Use the music button.",
+        });
       }
     } else {
       toast({
@@ -43,7 +53,7 @@ const Index = () => {
     {
       icon: MessageCircle,
       label: "Discord",
-      url: "https://discord.com/users/luke_nky",
+      url: "https://discord.com/users/1333932523285119009",
       description: "Gaming & Development",
       status: "online" as const,
       lastSeen: "2 minutes ago",
@@ -52,7 +62,7 @@ const Index = () => {
     {
       icon: Gamepad2,
       label: "Steam",
-      url: "https://steamcommunity.com/id/luke_nky",
+      url: "https://steamcommunity.com/profiles/76561199588427589",
       description: "Gaming Profile",
       status: "away" as const,
       lastSeen: "1 hour ago",
@@ -61,29 +71,29 @@ const Index = () => {
     {
       icon: Zap,
       label: "Epic Games",
-      url: "https://epicgames.com",
-      description: "Epic Games Profile",
+      url: "https://www.epicgames.com/id/a3eb16edd7bb4d7b9a5e0d319bb4a4af",
+      description: "Epic Account ID: a3eb16edd7bb4d7b9a5e0d319bb4a4af",
       gradient: "accent" as const
     },
     {
       icon: Github,
       label: "GitHub",
-      url: "https://github.com/luke_nky",
+      url: "https://github.com/FTWLuke1",
       description: "Code Repository",
       gradient: "primary" as const
     },
     {
       icon: Mail,
       label: "Email",
-      url: "mailto:luke@luke-nky.com",
+      url: "mailto:D1Goat0@proton.me",
       description: "Get in touch",
       gradient: "secondary" as const
     },
     {
       icon: Store,
       label: "D1 Store",
-      url: "https://d1store.com",
-      description: "My Store",
+      url: "#",
+      description: "Coming soon",
       gradient: "accent" as const
     },
     {
@@ -97,7 +107,7 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative">
-      <BackgroundVideo />
+      <BackgroundVideo onGlobalPause={() => pauseAudio()} />
       
       <div className="relative z-10 container mx-auto px-4 py-12">
         <div className="max-w-2xl mx-auto space-y-12">
@@ -117,6 +127,8 @@ const Index = () => {
               </div>
             ))}
           </div>
+
+          <DonateSection />
           
           <div className="text-center">
             <p className="text-muted-foreground text-sm">

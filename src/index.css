@@ -25,9 +25,9 @@
     --secondary-foreground: 0 0% 98%;
     --secondary-glow: 200 100% 75%;
 
-    --accent: 140 100% 60%;
+    --accent: 320 85% 65%;
     --accent-foreground: 0 0% 98%;
-    --accent-glow: 140 100% 75%;
+    --accent-glow: 320 85% 78%;
 
     /* Status colors */
     --status-online: 140 100% 60%;
@@ -47,7 +47,7 @@
     --gradient-primary: linear-gradient(135deg, hsl(280 100% 70%), hsl(280 100% 85%));
     --gradient-secondary: linear-gradient(135deg, hsl(200 100% 60%), hsl(200 100% 75%));
     --gradient-card: linear-gradient(135deg, hsl(240 8% 12% / 0.8), hsl(240 8% 8% / 0.6));
-    --gradient-hero: linear-gradient(135deg, hsl(280 100% 70% / 0.1), hsl(200 100% 60% / 0.1));
+    --gradient-hero: linear-gradient(135deg, hsl(280 100% 70% / 0.12), hsl(200 100% 60% / 0.12), hsl(320 85% 65% / 0.12));
 
     /* Shadows and glows */
     --shadow-glow: 0 0 30px hsl(280 100% 70% / 0.3);
@@ -162,7 +162,7 @@
   }
   
   .status-online {
-    @apply bg-status-online shadow-[0_0_10px_hsl(var(--status-online))]];
+    @apply bg-status-online shadow-[0_0_10px_hsl(var(--status-online))];
   }
   
   .status-offline {
@@ -170,6 +170,6 @@
   }
   
   .status-away {
-    @apply bg-status-away shadow-[0_0_10px_hsl(var(--status-away))]];
+    @apply bg-status-away shadow-[0_0_10px_hsl(var(--status-away))];
   }
 }

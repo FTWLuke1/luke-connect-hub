@@ -2,7 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { Play, Pause, Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const BackgroundVideo = () => {
+interface BackgroundVideoProps {
+  onGlobalPause?: () => void;
+  autoPlay?: boolean;
+}
+
+const BackgroundVideo = ({ onGlobalPause, autoPlay = true }: BackgroundVideoProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
@@ -20,26 +25,36 @@ const BackgroundVideo = () => {
         console.log('No background video found');
       }
     };
-    
     checkVideo();
   }, []);
 
-  const togglePlay = () => {
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-      } else {
-        videoRef.current.play();
+  useEffect(() => {
+    const v = videoRef.current;
+    if (hasVideo && v && autoPlay) {
+      const playPromise = v.play();
+      if (playPromise && typeof playPromise.then === 'function') {
+        playPromise.then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
       }
-      setIsPlaying(!isPlaying);
     }
+  }, [hasVideo, autoPlay]);
+
+  const togglePlay = () => {
+    if (!videoRef.current) return;
+    if (isPlaying) {
+      videoRef.current.pause();
+      onGlobalPause?.();
+    } else {
+      videoRef.current.play();
+    }
+    setIsPlaying(!isPlaying);
   };
 
   const toggleMute = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
+    if (!videoRef.current) return;
+    videoRef.current.muted = !isMuted;
+    setIsMuted(!isMuted);
+    // Pause audio as requested when interacting with the mute button
+    onGlobalPause?.();
   };
 
   if (!hasVideo) {
@@ -64,17 +79,20 @@ const BackgroundVideo = () => {
         loop
         muted={isMuted}
         playsInline
+        preload="auto"
+        onError={() => setHasVideo(false)}
       >
         <source src="/media/background.mp4" type="video/mp4" />
       </video>
       
-      <div className="fixed inset-0 bg-background/70 -z-10" />
+      <div className="fixed inset-0 bg-background/55 -z-10" />
       
       <div className="fixed bottom-4 right-4 flex space-x-2 z-10">
         <Button
           onClick={togglePlay}
           size="sm"
           className="btn-glass w-10 h-10 p-0"
+          aria-label={isPlaying ? "Pause background video and audio" : "Play background video"}
         >
           {isPlaying ? (
             <Pause className="w-4 h-4" />
@@ -87,6 +105,7 @@ const BackgroundVideo = () => {
           onClick={toggleMute}
           size="sm"
           className="btn-glass w-10 h-10 p-0"
+          aria-label={isMuted ? "Unmute background video (audio stays paused)" : "Mute background video"}
         >
           {isMuted ? (
             <VolumeX className="w-4 h-4" />
