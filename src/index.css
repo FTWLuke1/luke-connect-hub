@@ -17,17 +17,17 @@
     --card-glow: 240 8% 8%;
 
     /* Neon accent colors */
-    --primary: 280 100% 70%;
+    --primary: 220 100% 60%;
     --primary-foreground: 0 0% 98%;
-    --primary-glow: 280 100% 85%;
+    --primary-glow: 220 100% 75%;
 
-    --secondary: 200 100% 60%;
+    --secondary: 200 100% 55%;
     --secondary-foreground: 0 0% 98%;
-    --secondary-glow: 200 100% 75%;
+    --secondary-glow: 200 100% 70%;
 
-    --accent: 320 85% 65%;
+    --accent: 240 85% 65%;
     --accent-foreground: 0 0% 98%;
-    --accent-glow: 320 85% 78%;
+    --accent-glow: 240 85% 78%;
 
     /* Status colors */
     --status-online: 140 100% 60%;
@@ -39,20 +39,20 @@
     --muted-foreground: 240 5% 65%;
     --border: 240 6% 20%;
     --input: 240 8% 12%;
-    --ring: 280 100% 70%;
+    --ring: 220 100% 60%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(280 100% 70%), hsl(280 100% 85%));
-    --gradient-secondary: linear-gradient(135deg, hsl(200 100% 60%), hsl(200 100% 75%));
+    --gradient-primary: linear-gradient(135deg, hsl(220 100% 60%), hsl(220 100% 75%));
+    --gradient-secondary: linear-gradient(135deg, hsl(200 100% 55%), hsl(200 100% 70%));
     --gradient-card: linear-gradient(135deg, hsl(240 8% 12% / 0.8), hsl(240 8% 8% / 0.6));
-    --gradient-hero: linear-gradient(135deg, hsl(280 100% 70% / 0.12), hsl(200 100% 60% / 0.12), hsl(320 85% 65% / 0.12));
+    --gradient-hero: linear-gradient(135deg, hsl(220 100% 60% / 0.12), hsl(200 100% 55% / 0.12), hsl(240 85% 65% / 0.12));
 
     /* Shadows and glows */
-    --shadow-glow: 0 0 30px hsl(280 100% 70% / 0.3);
+    --shadow-glow: 0 0 30px hsl(220 100% 60% / 0.3);
     --shadow-card: 0 8px 32px hsl(240 10% 3.9% / 0.5);
-    --shadow-button: 0 4px 20px hsl(280 100% 70% / 0.4);
+    --shadow-button: 0 4px 20px hsl(220 100% 60% / 0.4);
 
     --radius: 0.75rem;
 
@@ -66,11 +66,11 @@
   /* Custom cartoon cursor */
   * {
     @apply border-border;
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath fill='%23FF6B9D' stroke='%23000' stroke-width='2' d='M8 4 L24 20 L18 22 L14 28 L10 24 L8 18 Z'/%3E%3C/svg%3E"), auto;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath fill='%234F93F7' stroke='%23000' stroke-width='2' d='M8 4 L24 20 L18 22 L14 28 L10 24 L8 18 Z'/%3E%3C/svg%3E"), auto;
   }
 
   button, a, input[type="button"], input[type="submit"] {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath fill='%23A855F7' stroke='%23000' stroke-width='2' d='M16 4 L28 16 L22 18 L18 28 L14 22 L4 16 Z'/%3E%3C/svg%3E"), pointer;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath fill='%234F93F7' stroke='%23000' stroke-width='2' d='M16 4 L28 16 L22 18 L18 28 L14 22 L4 16 Z'/%3E%3C/svg%3E"), pointer;
   }
 
   body {
