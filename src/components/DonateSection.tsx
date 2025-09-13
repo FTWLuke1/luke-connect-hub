@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 const DonateSection = () => {
   return (
     <section aria-labelledby="donate-heading" className="glass rounded-xl p-6 shadow-card">
-      <h2 id="donate-heading" className="text-xl font-semibold mb-3">Support the Creator</h2>
-      <p className="text-muted-foreground text-sm mb-4">
+      <h2 id="donate-heading" className="text-xl font-semibold mb-3 text-center">Support the Creator</h2>
+      <p className="text-muted-foreground text-sm mb-4 text-center">
         Donate via Venmo or PayPal: <span className="font-medium">@d1goat0</span>
       </p>
       <div className="flex gap-3 justify-center">
