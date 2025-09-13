@@ -30,7 +30,7 @@ const SocialLink = ({
     <Button
       asChild
       variant="outline"
-      className="h-auto p-6 w-full justify-center space-x-4 group glass border-primary/30 hover:shadow-glow transition-all duration-300 text-center"
+      className="h-auto p-6 w-full justify-center space-x-4 group border-primary/30 bg-background/10 backdrop-blur-sm hover:border-primary/60 hover:shadow-[0_0_15px_hsl(var(--primary)/0.3)] transition-all duration-300 text-center"
     >
       <a href={url} target="_blank" rel="noopener noreferrer">
         <div className="relative">
