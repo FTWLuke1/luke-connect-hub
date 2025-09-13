@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { 
   MessageCircle, 
   Github, 
@@ -11,43 +10,9 @@ import {
 import ProfileHeader from "@/components/ProfileHeader";
 import SocialLink from "@/components/SocialLink";
 import BackgroundVideo from "@/components/BackgroundVideo";
-import AudioIntro from "@/components/AudioIntro";
 import DonateSection from "@/components/DonateSection";
-import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
-  const { hasAudio, playAudio, pauseAudio, isPlaying: isAudioPlaying } = AudioIntro();
-  const { toast } = useToast();
-
-  useEffect(() => {
-    // Try to autoplay audio on load (may be blocked by some browsers)
-    if (hasAudio) {
-      playAudio();
-    }
-  }, [hasAudio, playAudio]);
-
-  const handlePlayAudio = async () => {
-    if (hasAudio) {
-      const played = await playAudio();
-      if (played) {
-        toast({
-          title: "Playing intro audio",
-          description: "Welcome to Luke_NKY's profile!",
-        });
-      } else {
-        toast({
-          title: "Tap to enable audio",
-          description: "Your browser blocked autoplay. Use the music button.",
-        });
-      }
-    } else {
-      toast({
-        title: "No intro audio found",
-        description: "Drop an MP3 file named 'intro.mp3' in the public/media folder",
-        variant: "destructive"
-      });
-    }
-  };
 
   const socialLinks = [
     {
@@ -65,7 +30,7 @@ const Index = () => {
       url: "https://steamcommunity.com/profiles/76561199588427589",
       description: "Gaming Profile",
       status: "away" as const,
-      lastSeen: "1 hour ago",
+      lastSeen: "Last game: Counter-Strike 2",
       gradient: "secondary" as const
     },
     {
@@ -107,14 +72,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative">
-      <BackgroundVideo onGlobalPause={() => pauseAudio()} />
+      <BackgroundVideo />
       
       <div className="relative z-10 container mx-auto px-4 py-12">
         <div className="max-w-2xl mx-auto space-y-12">
-          <ProfileHeader 
-            onPlayAudio={handlePlayAudio}
-            isAudioPlaying={isAudioPlaying}
-          />
+          <ProfileHeader />
           
           <div className="grid gap-4">
             {socialLinks.map((link, index) => (
@@ -132,19 +94,11 @@ const Index = () => {
           
           <div className="text-center">
             <p className="text-muted-foreground text-sm">
-              Built with ❤️ by Luke_NKY
+              Built with ❤️ by D1Goat0
             </p>
           </div>
         </div>
       </div>
-      
-      {!hasAudio && (
-        <div className="fixed bottom-4 left-4 glass p-4 rounded-lg max-w-sm z-10">
-          <p className="text-xs text-muted-foreground">
-            💡 Drop an MP3 file named "intro.mp3" in the public/media folder for audio intro
-          </p>
-        </div>
-      )}
     </div>
   );
 };
