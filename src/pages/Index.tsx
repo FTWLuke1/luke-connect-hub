@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { 
   MessageCircle, 
   Github, 
@@ -11,8 +12,17 @@ import ProfileHeader from "@/components/ProfileHeader";
 import SocialLink from "@/components/SocialLink";
 import BackgroundVideo from "@/components/BackgroundVideo";
 import DonateSection from "@/components/DonateSection";
+import AudioIntro from "@/components/AudioIntro";
 
 const Index = () => {
+  const { hasAudio, playAudio } = AudioIntro();
+
+  // Auto-play audio when component mounts
+  useEffect(() => {
+    if (hasAudio) {
+      playAudio();
+    }
+  }, [hasAudio, playAudio]);
 
   const socialLinks = [
     {

@@ -1,4 +1,4 @@
-import profileAvatar from "@/assets/profile-avatar.jpg";
+
 
 const ProfileHeader = () => {
   return (
@@ -6,7 +6,7 @@ const ProfileHeader = () => {
       <div className="relative">
         <div className="w-32 h-32 mx-auto rounded-full glass border-2 border-primary/30 p-2 animate-pulse-glow overflow-hidden">
           <img 
-            src={profileAvatar}
+            src="/media/profile-avatar.png"
             alt="D1Goat0 profile avatar"
             className="w-full h-full rounded-full object-cover"
           />

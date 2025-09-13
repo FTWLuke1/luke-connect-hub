@@ -86,34 +86,6 @@ const BackgroundVideo = ({ onGlobalPause, autoPlay = true }: BackgroundVideoProp
       </video>
       
       <div className="fixed inset-0 bg-background/55 -z-10" />
-      
-      <div className="fixed bottom-4 right-4 flex space-x-2 z-10">
-        <Button
-          onClick={togglePlay}
-          size="sm"
-          className="btn-glass w-10 h-10 p-0"
-          aria-label={isPlaying ? "Pause background video and audio" : "Play background video"}
-        >
-          {isPlaying ? (
-            <Pause className="w-4 h-4" />
-          ) : (
-            <Play className="w-4 h-4" />
-          )}
-        </Button>
-        
-        <Button
-          onClick={toggleMute}
-          size="sm"
-          className="btn-glass w-10 h-10 p-0"
-          aria-label={isMuted ? "Unmute background video (audio stays paused)" : "Mute background video"}
-        >
-          {isMuted ? (
-            <VolumeX className="w-4 h-4" />
-          ) : (
-            <Volume2 className="w-4 h-4" />
-          )}
-        </Button>
-      </div>
     </>
   );
 };
