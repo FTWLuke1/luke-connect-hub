@@ -1,0 +1,11 @@
+[build]
+  command = "bun run build"  # or "npm run build"
+  publish = "dist"
+
+# only if you actually have serverless functions:
+# functions = "netlify/functions"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
