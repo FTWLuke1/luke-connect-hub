@@ -43,6 +43,19 @@ const AudioIntro = () => {
         await audio.play();
         return true;
       } catch (e) {
+        console.log('Autoplay blocked, will try on user interaction');
+        return false;
+      }
+    }
+    return false;
+  };
+
+  const tryAutoplayOnInteraction = async () => {
+    if (audio && hasAudio && !isPlaying) {
+      try {
+        await audio.play();
+        return true;
+      } catch (e) {
         return false;
       }
     }
@@ -55,7 +68,7 @@ const AudioIntro = () => {
     }
   };
 
-  return { hasAudio, playAudio, pauseAudio, isPlaying };
+  return { hasAudio, playAudio, pauseAudio, isPlaying, tryAutoplayOnInteraction };
 };
 
 export default AudioIntro;

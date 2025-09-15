@@ -15,7 +15,7 @@ import DonateSection from "@/components/DonateSection";
 import AudioIntro from "@/components/AudioIntro";
 
 const Index = () => {
-  const { hasAudio, playAudio } = AudioIntro();
+  const { hasAudio, playAudio, tryAutoplayOnInteraction } = AudioIntro();
 
   // Auto-play audio when component mounts
   useEffect(() => {
@@ -23,6 +23,11 @@ const Index = () => {
       playAudio();
     }
   }, [hasAudio, playAudio]);
+
+  // Handle user interaction to trigger audio if autoplay was blocked
+  const handleUserInteraction = () => {
+    tryAutoplayOnInteraction();
+  };
 
   const socialLinks = [
     {
@@ -81,7 +86,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative" onClick={handleUserInteraction}>
       <BackgroundVideo />
       
       <div className="relative z-10 container mx-auto px-4 py-12">
